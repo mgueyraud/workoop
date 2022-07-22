@@ -3,12 +3,34 @@ version: '3'
 services:
   backend:
     container_name: workoop-backend
+    networks:
+      - core
     build: 
       context: backend
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./backend:/app/backend
+      - ./backend:/backend
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8000:8000
+  frontend:
+    container_name: workoop-frontend
+    networks:
+      - core
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    command:
+      'yarn run dev'
+    volumes:
+      - ./frontend:/frontend
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./frontend/node_modules:/frontend/node_modules
+    ports:
+      - 3000:3000
+    links:
+      - backend:backend
+networks:
+  core:
+    external: true
