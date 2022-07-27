@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  db:
+    container_name: workoop-bd
+    networks:
+      - core
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
   backend:
     container_name: workoop-backend
     networks:
@@ -8,12 +17,18 @@ services:
     build: 
       context: backend
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py makemigrations &&
+                      python manage.py migrate &&
+                      python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/backend
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8000:8000
+    depends_on:
+      - db
+    links:
+      - db:db
   frontend:
     container_name: workoop-frontend
     networks:
