@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Vincula core a woorkop, algo como extender seria
     "workoop",
+    "mptt",
     "rest_framework",
 ]
 
