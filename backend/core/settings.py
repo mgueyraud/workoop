@@ -13,9 +13,16 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import django_heroku
 from pathlib import Path
+import environ
+
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# reading .env file
+environ.Env.read_env(str(BASE_DIR) + '/.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -92,11 +99,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd3ru6jsedqve08',
-        'USER': 'gsyhbkhfbtnfnz',
-        'PASSWORD': 'e7253369aa5866b0108d00b1995b52a1141c6a5d342f991ffc6d9f8d8757e2a9',
-        'HOST': 'ec2-3-224-184-9.compute-1.amazonaws.com',
+        'ENGINE': env.str('DB_ENGINE'),
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
+        'HOST': env.str('DB_HOST'),
         'PORT': 5432,
     }
 }
