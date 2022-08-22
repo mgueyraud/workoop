@@ -14,6 +14,11 @@ docker-compose up
 
 Con esto se genera las imagenes, pudiendo asi ver el backend en el puerto 8000 y el frontend en el puerto 3000.
 
+Para poder tener super usuarios en django se corre el comando:
+```bash
+docker exec -ti workoop-backend python manage.py createsuperuser
+```
+
 ## Produccion
 
 El backend django lo tenemos corriendo en heroku, el frontend con NextJS esta corriendo en vercel, seguidamente podran ver las urls de produccion de los distintos proyectos:
