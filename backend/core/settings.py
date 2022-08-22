@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env(str(BASE_DIR) + '/.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +32,7 @@ SECRET_KEY = "django-insecure-x@yj1iw#w%^@boo^p&dmcbb!l0+skfn==8rw1q1*^23**yzw(9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','backend', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,7 +48,7 @@ INSTALLED_APPS = [
     "workoop",
     "mptt",
     "rest_framework",
-    #sso
+    # sso
     "django.contrib.sites",
     'allauth',
     'allauth.account',
@@ -86,11 +93,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'ENGINE': env.str('DB_ENGINE'),
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
+        'HOST': env.str('DB_HOST'),
         'PORT': 5432,
     }
 }
