@@ -14,6 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>Next app</main>
+      <h1>Next</h1>
       <p>Que facha que es next</p>
     </div>
   );
