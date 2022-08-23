@@ -9,7 +9,7 @@ Antes de levantar el proyecto, asegurarse de tener las variables de entorno nece
 
 Una vez instalado docker, se corre el comando:
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 Con esto se genera las imagenes, pudiendo asi ver el backend en el puerto 8000 y el frontend en el puerto 3000.
