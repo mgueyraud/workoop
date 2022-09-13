@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 // https://stackoverflow.com/questions/71885441/next-js-getserversideprops-is-not-working-using-docker
 
-const Home: NextPage = () => {
+const Products: NextPage = ({ data }: any) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -13,11 +13,21 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>Next apasd</main>
-      <h1>Mario es el god</h1>
-      <p>Que facha que es next</p>
+      <main>Products</main>
+      <p>{data.message}</p>
     </div>
   );
 };
 
-export default Home;
+export async function getServerSideProps() {
+  const res = await fetch(`${process.env.BACKEND_API}/test`);
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
+export default Products;
