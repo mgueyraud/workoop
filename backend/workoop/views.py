@@ -5,6 +5,7 @@ from django.views import View
 from .models import Category, Product
 from .serializers import ProductSerializer
 import environ
+from pathlib import Path
 # Google login provider imports
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
