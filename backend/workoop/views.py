@@ -4,11 +4,18 @@ from rest_framework import generics
 from django.views import View
 from .models import Category, Product
 from .serializers import ProductSerializer
+import environ
 # Google login provider imports
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from django.conf import settings
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(str(BASE_DIR) + '/.env')
 
 # Create your views here.
 
@@ -38,5 +45,5 @@ class TestView(View):
 class GoogleLoginView(SocialLoginView):
     authentication_classes = []
     adapter_class = GoogleOAuth2Adapter
-    callback_url = 'http://localhost:3000'
+    callback_url = env.str('GOOGLE_CALLBACK_URL')
     client_class = OAuth2Client
