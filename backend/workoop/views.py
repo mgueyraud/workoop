@@ -4,6 +4,11 @@ from rest_framework import generics
 from django.views import View
 from .models import Category, Product
 from .serializers import ProductSerializer
+# Google login provider imports
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from django.conf import settings
 
 # Create your views here.
 
@@ -28,3 +33,10 @@ class ProductListView(View):
 class TestView(View):
     def get(self, request, id=0):
         return JsonResponse({'message': 'PUreteee'})
+
+
+class GoogleLoginView(SocialLoginView):
+    authentication_classes = []
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = 'http://localhost:3000'
+    client_class = OAuth2Client

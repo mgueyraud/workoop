@@ -23,8 +23,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # extends the woorkop urls
     path("", include("workoop.urls", namespace="workoop")),
-    path('accounts/', include('allauth.urls')),
-    path("home", TemplateView.as_view( template_name="home.html"), name="home"),
 ]
 
 if settings.DEBUG:

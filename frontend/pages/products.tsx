@@ -2,9 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { useSession } from "next-auth/react";
 // https://stackoverflow.com/questions/71885441/next-js-getserversideprops-is-not-working-using-docker
 
 const Products: NextPage = ({ data }: any) => {
+  const { data: session } = useSession();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,6 +18,7 @@ const Products: NextPage = ({ data }: any) => {
 
       <main>Products</main>
       <p>{data.message}</p>
+      <p>{session?.user?.email}</p>
     </div>
   );
 };

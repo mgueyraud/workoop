@@ -13,7 +13,7 @@ services:
     ports:
       - "25432:5432"
     volumes:
-      - /docker/postgres-data:/var/lib/postgresql/data
+      - dev-db-data:/var/lib/postgresql/data
   backend:
     container_name: workoop-backend
     networks:
@@ -35,9 +35,7 @@ services:
     container_name: workoop-frontend
     networks:
       - core
-    build:
-      context: frontend
-      dockerfile: Dockerfile
+    build: ./frontend
     restart: always
     volumes:
       - ./frontend:/frontend
@@ -49,3 +47,5 @@ services:
 networks:
   core:
     external: true
+volumes:
+  dev-db-data:
