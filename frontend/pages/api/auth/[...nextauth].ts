@@ -12,6 +12,7 @@ export const authOptions: NextAuthOptions = {
     }),
     // ...add more providers here
   ],
+  secret: process.env.SECRET_NEXT_AUTH,
   callbacks:{
     async signIn({ user, account, profile, email, credentials }) {
 
