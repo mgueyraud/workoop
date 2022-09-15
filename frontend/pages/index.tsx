@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import {
@@ -47,8 +47,20 @@ const Home = ({
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(request: GetServerSideProps) {
   const providers = await getProviders();
+
+  const session = await getSession(request as GetSessionParams);
+  console.log({ session });
+
+  if (session?.user) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: true,
+      },
+    };
+  }
 
   return {
     props: { providers },

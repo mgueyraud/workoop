@@ -19,6 +19,8 @@ export const authOptions: NextAuthOptions = {
   callbacks:{
     async signIn({ user, account, profile, email, credentials }) {
 
+      console.log({user, account, profile, email, credentials})
+
         if(account.provider === 'google'){
             const {access_token, id_token} = account;
 
@@ -28,7 +30,7 @@ export const authOptions: NextAuthOptions = {
                     id_token
                 });
 
-                const { accessToken } = response.data;
+                const { access_token: accessToken } = response.data;
 
                 account.access_token = accessToken;
             }catch(e){
@@ -38,17 +40,16 @@ export const authOptions: NextAuthOptions = {
 
         return true
       },
-      async session({ session, user, token }) {
+      async session({ session, token }) {
 
-        if(user){
-            session.accessToken = token.accessToken
-        }
+        session.accessToken = token.accessToken;
 
         return session
       },
-      async jwt({ token, user, account, profile, isNewUser }) {
-        if(user && account){
-            token.accessToken = account.access_token
+      async jwt({ token, account }) {
+
+        if (account) {
+          token.accessToken = account.access_token
         }
 
         return token
