@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     # Custom apps
     "mptt",
-    "workoop"
+    "workoop",
+    "drf_spectacular"
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -78,6 +79,11 @@ SOCIALACCOUNT_EMAIL_REQUIRED = False
 
 SITE_ID = 1
 REST_USE_JWT = True  # Use json web tokens
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",  # for Cors
@@ -196,5 +202,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "dj_rest_auth.utils.JWTCookieAuthentication"
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": 'drf_spectacular.openapi.AutoSchema',
 }

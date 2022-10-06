@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import NavbarLayout from "../layouts/NavbarLayout";

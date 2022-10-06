@@ -4,7 +4,7 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
+  Link as ChakraLink,
   IconButton,
   Button,
   Menu,
@@ -19,11 +19,12 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu, FiPlus, FiX } from "react-icons/fi";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Links = ["Dashboard", "Projects", "Team"];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
+  <ChakraLink
     px={2}
     py={1}
     rounded={"md"}
@@ -34,7 +35,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     href={"#"}
   >
     {children}
-  </Link>
+  </ChakraLink>
 );
 
 export default function Navbar() {
@@ -54,7 +55,9 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Workoop</Box>
+            <ChakraLink as={Link} href="/">
+              Workoop
+            </ChakraLink>
             <HStack
               as={"nav"}
               spacing={4}

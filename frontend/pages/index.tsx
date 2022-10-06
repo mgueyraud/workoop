@@ -47,11 +47,10 @@ const Home = ({
   );
 };
 
-export async function getServerSideProps(request: GetServerSideProps) {
+export const getServerSideProps: GetServerSideProps = async (request) => {
   const providers = await getProviders();
 
-  const session = await getSession(request as GetSessionParams);
-  console.log({ session });
+  const session = await getSession(request);
 
   if (session?.user) {
     return {
@@ -65,6 +64,6 @@ export async function getServerSideProps(request: GetServerSideProps) {
   return {
     props: { providers },
   };
-}
+};
 
 export default Home;

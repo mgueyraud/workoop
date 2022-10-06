@@ -64,3 +64,4 @@ djangorestframework-simplejwt==5.2.0
 psycopg2==2.9.3
 isort==5.10.1
 django-js-asset==2.0.0
+drf-spectacular>=0.15.1,<0.16

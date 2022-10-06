@@ -1,8 +1,8 @@
-import { GetServerSideProps } from "next";
-import { getSession, GetSessionParams } from "next-auth/react";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "next-auth/react";
 
-export default async function vertifyAuth(request: GetServerSideProps){
-  const session = await getSession(request as GetSessionParams);
+export default async function vertifyAuth(request: GetServerSidePropsContext){
+  const session = await getSession(request);
 
   if (!session?.user) {
     return {
@@ -13,5 +13,5 @@ export default async function vertifyAuth(request: GetServerSideProps){
     };
   }
 
-  return { props: {} };
+  return { session };
 }

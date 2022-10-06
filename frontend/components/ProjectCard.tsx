@@ -3,18 +3,23 @@ import {
   Heading,
   useColorModeValue,
   Text,
-  Link,
+  Link as ChakraLink,
   Flex,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
 
 type ProjectCardProps = {
   title: string;
   description: string;
+  id: string;
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  title,
+  description,
+  id,
+}) => {
   return (
     <Box
       maxW={"320px"}
@@ -35,9 +40,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description }) => {
       <Text color={useColorModeValue("gray.700", "gray.400")} mt={2}>
         {description}
       </Text>
-      <Link href={"#"} color={"blue.400"} mt="auto">
-        <Flex alignItems="center">Ir al proyecto</Flex>
-      </Link>
+      <ChakraLink
+        as={Link}
+        color={"blue.400"}
+        mt="auto"
+        pt={5}
+        href={`/projects/${id}`}
+      >
+        <Text
+          alignItems="center"
+          color={"blue.400"}
+          style={{ cursor: "pointer" }}
+        >
+          Ir al proyecto
+        </Text>
+      </ChakraLink>
     </Box>
   );
 };

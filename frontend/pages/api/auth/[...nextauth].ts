@@ -19,8 +19,6 @@ export const authOptions: NextAuthOptions = {
   callbacks:{
     async signIn({ user, account, profile, email, credentials }) {
 
-      console.log({user, account, profile, email, credentials})
-
         if(account.provider === 'google'){
             const {access_token, id_token} = account;
 
@@ -31,6 +29,7 @@ export const authOptions: NextAuthOptions = {
                 });
 
                 const { access_token: accessToken } = response.data;
+                console.log(response.data);
 
                 account.access_token = accessToken;
             }catch(e){

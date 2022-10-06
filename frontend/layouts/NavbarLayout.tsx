@@ -14,7 +14,9 @@ export default function NavbarLayout({
     <>
       {status === "authenticated" ? <Navbar /> : null}
       <main>
-        <Box p={4}>{children}</Box>
+        <Box p={4} mt={4}>
+          {children}
+        </Box>
       </main>
     </>
   );

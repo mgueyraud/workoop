@@ -39,7 +39,6 @@ services:
     restart: always
     volumes:
       - ./frontend:/frontend
-      - /frontend/node_modules
     command:
       'yarn run dev'
     ports:
